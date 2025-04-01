@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\CRM\\CRM\\CRM\\API.csproj": {}
+    "D:\\CRM\\CRM\\CRM\\API.csproj": {}
   },
   "projects": {
-    "E:\\CRM\\CRM\\CRM\\API.csproj": {
+    "D:\\CRM\\CRM\\CRM\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\CRM\\CRM\\CRM\\API.csproj",
+        "projectUniqueName": "D:\\CRM\\CRM\\CRM\\API.csproj",
         "projectName": "API",
-        "projectPath": "E:\\CRM\\CRM\\CRM\\API.csproj",
-        "packagesPath": "D:\\.nuget",
-        "outputPath": "E:\\CRM\\CRM\\CRM\\obj\\",
+        "projectPath": "D:\\CRM\\CRM\\CRM\\API.csproj",
+        "packagesPath": "C:\\Users\\fliam\\.nuget\\packages\\",
+        "outputPath": "D:\\CRM\\CRM\\CRM\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\kurr\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\fliam\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -101,7 +101,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.407/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

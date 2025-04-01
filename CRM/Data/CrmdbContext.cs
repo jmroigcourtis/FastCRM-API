@@ -18,11 +18,13 @@ public class CrmdbContext : DbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseMySql(_connectionString, ServerVersion.AutoDetect(_connectionString));
+        optionsBuilder.UseSqlServer("Server=DESKTOP-CRBLNIP\\SQLEXPRESS;Database=CRM;Integrated Security=True;TrustServerCertificate=True;");
     }
     public DbSet <UsersEntity> Users { get; set; }
     
     public DbSet <UserLogsEntity> UserLogs { get; set; }
+    
+    public DbSet <TasksFollowUpEntity> TasksFollowUps { get; set; }
 
 
 }

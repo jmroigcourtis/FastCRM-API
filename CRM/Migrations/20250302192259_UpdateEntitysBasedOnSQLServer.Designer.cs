@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRM.Migrations
 {
     [DbContext(typeof(CrmdbContext))]
-    [Migration("20250225172350_hashAttrCreated")]
-    partial class hashAttrCreated
+    [Migration("20250302192259_UpdateEntitysBasedOnSQLServer")]
+    partial class UpdateEntitysBasedOnSQLServer
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,9 +21,9 @@ namespace CRM.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.1")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("CRM.Data.Entities.UserLogsEntity", b =>
                 {
@@ -31,22 +31,25 @@ namespace CRM.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("action")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("details")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("recordId")
                         .HasColumnType("int");
 
                     b.Property<string>("userName")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
@@ -59,31 +62,31 @@ namespace CRM.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("email")
                         .IsRequired()
                         .HasMaxLength(55)
-                        .HasColumnType("varchar(55)");
+                        .HasColumnType("nvarchar(55)");
 
                     b.Property<bool>("isAdmin")
-                        .HasMaxLength(55)
-                        .HasColumnType("tinyint(55)");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("lastLogin")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("password")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("username")
                         .IsRequired()
                         .HasMaxLength(55)
-                        .HasColumnType("varchar(55)");
+                        .HasColumnType("nvarchar(55)");
 
                     b.Property<DateTime>("whenCreated")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
