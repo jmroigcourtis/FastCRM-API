@@ -1,8 +1,10 @@
 using System.Text;
 using CRM.Data;
-using CRM.Services;
+using CRM.Services.Implementations;
+using CRM.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 
@@ -11,19 +13,17 @@ var builder = WebApplication.CreateBuilder(args);
     var jwtSettings = builder.Configuration.GetSection("JwtSettings");
     var key = Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]!);
     
-    
-
-// Configuración de CORS
     builder.Services.AddScoped<MailService>();
     builder.Services.AddCors(options =>
     {
-        options.AddPolicy("AllowLocalhost4200",
-            policy =>
-            {
-                policy.WithOrigins("http://localhost:4200") // Permite Angular
-                    .AllowAnyHeader()
-                    .AllowAnyMethod();
-            });
+        options.AddPolicy(name: "AllowLocalhost4200", policy =>
+        {
+            policy.WithOrigins("http://localhost:4200")
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+
     });
     builder.Services.AddAuthentication(options =>
     {
@@ -43,7 +43,14 @@ var builder = WebApplication.CreateBuilder(args);
     });
 
 
-    builder.Services.AddScoped<PasswordService>();
+
+    builder.Services.AddScoped<ILogger, Logger<object>>();
+    builder.Services.AddScoped<IMailService, MailService>();
+    builder.Services.AddScoped<IUserSecurityService, UserSecurityService>();
+    builder.Services.AddScoped<PasswordHasher<object>>();
+    builder.Services.AddScoped<IUserAccountService, UserAccountService>();
+    builder.Services.AddScoped<IQueryDbService, QueryDbService>();
+    builder.Services.AddScoped<IPasswordService, PasswordService>();
     builder.Services.AddAuthorization();
     builder.Services.AddControllers();
     builder.Services.AddSwaggerGen();
