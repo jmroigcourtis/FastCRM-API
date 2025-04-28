@@ -125,6 +125,30 @@ namespace CRM.Services.Implementations
             _logger.LogInformation($"User {username} has been deleted");
             return true;
         }
+
+        public async Task<UsersListDto> GetUsersFromDb()
+        {
+            var listOfUsers = await _dbContext.Set<UsersEntity>().ToListAsync();
+
+            var users = new UsersListDto();
+            users.usersList = new List<PublicUserDataDto>();
+
+            foreach (var user in listOfUsers)
+            {
+                var us = new PublicUserDataDto()
+                {
+                    Username = user.username,
+                    Email = user.email,
+                    WhenCreated = user.whenCreated,
+                    IsAdmin = user.isAdmin
+                };
+                users.usersList.Add(us);
+            }
+            
+            Console.WriteLine(users);
+
+            return users;
+        }
     }
 }
 

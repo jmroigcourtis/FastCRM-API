@@ -33,4 +33,6 @@ public interface IUserAccountService
     /// <param name="email"></param>
     /// <returns></returns>
     Task<bool> DeleteUserAsync(string username, string email);
+
+    Task<UsersListDto> GetAllUsers();
 }

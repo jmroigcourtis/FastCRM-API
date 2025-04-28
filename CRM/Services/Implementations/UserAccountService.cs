@@ -97,6 +97,13 @@ namespace CRM.Services.Implementations
             _logger.LogInformation($"User {username} deleted");
             return true;
         }
+
+        public async Task<UsersListDto> GetAllUsers()
+        {
+           var users = await _queryDbService.GetUsersFromDb();
+
+           return users;
+        }
     }
     
 }

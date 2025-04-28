@@ -52,6 +52,9 @@ namespace CRM.Services.Contracts
         /// <param name="email"></param>
         /// <returns></returns>
         Task<bool> RemoveUserOnDb(string username, string email);
+
+        Task<UsersListDto> GetUsersFromDb();
+
     }
 }
 
