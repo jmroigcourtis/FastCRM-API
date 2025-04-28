@@ -73,4 +73,14 @@ public class UserController: ControllerBase
         
         return Ok($"User {username} deleted");
     }
+
+    [HttpGet]
+    [AllowAnonymous]
+
+    public async Task<ActionResult<UsersListDto>> GetAllUsers()
+    {
+       var users = await _userAccountService.GetAllUsers();
+
+       return Ok(users);
+    }
 }
