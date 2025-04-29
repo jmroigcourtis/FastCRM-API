@@ -1,0 +1,39 @@
+using CRM.Data;
+using CRM.Data.Entities;
+using CRM.Models.Dto;
+using CRM.Repositories;
+using CRM.Services.Contracts;
+
+
+namespace CRM.Repositories
+{
+    public class DbLoggerRepository: IDbLoggerRepository
+    {
+        private readonly CrmdbContext _context;
+        private readonly ILogger<DbLoggerRepository> _logger;
+    
+        public DbLoggerRepository (CrmdbContext context, ILogger<DbLoggerRepository> logger)
+        {
+            _context = context;
+            _logger = logger;
+        }
+
+        public async Task<bool> WriteUserLogs(UserLogsDto logBody)
+        {
+            var newUserLogs = new UserLogsEntity
+            {
+                recordId = logBody.Id,
+                userName = logBody.userName,
+                action = logBody.action,
+                details = logBody.details
+            };
+
+            await _context.UserLogs.AddAsync(newUserLogs);
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation($"UserLogs added: {newUserLogs.recordId}");
+            return true;
+        }
+    }
+}
+

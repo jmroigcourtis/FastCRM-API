@@ -1,8 +1,8 @@
 using CRM.Models.Dto;
 
-namespace CRM.Services.Contracts;
+namespace CRM.Repositories;
 
-public interface IDbLoggerService
+public interface IDbLoggerRepository
 {
     /// <summary>
     /// Writes user activity logs 

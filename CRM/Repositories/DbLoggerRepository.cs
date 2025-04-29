@@ -1,17 +1,15 @@
 using CRM.Data;
 using CRM.Data.Entities;
 using CRM.Models.Dto;
-using CRM.Services.Contracts;
 
-
-namespace CRM.Services.Implementations
+namespace CRM.Repositories
 {
-    public class DbLoggerService: IDbLoggerService
+    public class DbLoggerRepository: IDbLoggerRepository
     {
         private readonly CrmdbContext _context;
-        private readonly ILogger<DbLoggerService> _logger;
+        private readonly ILogger<DbLoggerRepository> _logger;
     
-        public DbLoggerService (CrmdbContext context, ILogger<DbLoggerService> logger)
+        public DbLoggerRepository (CrmdbContext context, ILogger<DbLoggerRepository> logger)
         {
             _context = context;
             _logger = logger;
